@@ -40,7 +40,7 @@ const App = () => {
     <div className="App">
       { buttons }
       <Button clickable content="J'aime"></Button>
-      <br />
+      <br/>
       {JSON.stringify(currentProfile)}
     </div>
   );

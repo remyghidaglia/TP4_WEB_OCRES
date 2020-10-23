@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 const PROFILS = [
   {
@@ -14,16 +15,31 @@ const PROFILS = [
 ];
 const App = () => {
 
-  const buttons = PROFILS.map(c => <Button content={c.name}></Button>)
+  const buttons = PROFILS.map(p => <Button content={p.name}></Button>)
 
   return (
     <div className="App">
       { buttons }
+      <Button clickable content="J'aime"></Button>
     </div>
   );
 }
 
 
-const Button = ({content}) => <button className="button">{content}</button>
+const Button = ({content, clickable}) => {
+  const [clicked, setClicked] = useState(false);  
+  var renderedText = content
+  if (clickable){
+    renderedText = `${clicked ? 1 : 0} ` + renderedText
+  }
+  return (
+    <button 
+      className="button" 
+      onClick={clickable && (() => setClicked(!clicked))}
+    >
+      {renderedText} 
+    </button>
+    )
+}
 
 export default App;

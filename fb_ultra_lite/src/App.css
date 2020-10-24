@@ -1,1 +1,54 @@
-
+Button {
+    color : white;
+    background-color: steelblue;
+    padding: 10px;
+    border: none;
+    margin: 5px;
+    border-radius: 5px;
+    border : 1px solid steelblue;
+    transition: 0s;
+}
+Button:hover{
+    color: steelblue;
+    background-color: white;
+}
+.profiles{
+    text-align: right;
+    border-top: 2px solid steelblue;
+    border-bottom: 2px solid steelblue;
+}
+.container .thumbnail{
+    display: block;
+    margin : auto;
+}
+.thumbnail{
+    width: 600px;
+    text-align: center;
+    margin-top: 20px;
+    border:2px solid steelblue;
+    padding: 10px;
+}
+.thumbnail p{
+    color: steelblue;
+}
+.thumbnail img{
+    width :400px;
+    height : 500px;
+}
+h1 {
+    text-align: center;
+    color :steelblue;
+    font-size: 30px;
+}
+.content{
+    margin-top: 10px;
+}
+.publicationZone{
+    width: 1000px;
+    border:2px dotted steelblue;
+    text-align: center;
+}
+.content .publicationZone{
+    display: block;
+    margin: auto;
+}

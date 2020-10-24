@@ -1,4 +1,6 @@
-import logo from './logo.svg';
+import img1 from './img/bob.jpg';
+import img2 from './img/martine.jpg';
+import img3 from './img/camille.jpg';
 import './App.css';
 import { useState } from 'react';
 
@@ -7,20 +9,23 @@ const PROFILS = [
     firstname: "Bob",
     name: "Dylan",
     dateOfBirth:"17/02/1970",
-    img :"./img/bob.jpg",
+    image :img1, 
+    publication : "Hey, j'adore la guitare !"
   },
   {
     firstname: "Martine",
     name: "Aubry",
     dateOfBirth:"13/03/1983",
-    img :"./img/martine.jpg",
+    image :img2, 
+    publication :"Hey, j'adore le PS !"
 
   },
   {
     firstname: "Camille",
     name: "Mares",
     dateOfBirth:"28/06/1992",
-    img :"./img/camille.jpg",
+    image :img3, 
+    publication : "Hey, j'adore les coktails !"
   }
 ];
 
@@ -38,26 +43,41 @@ const App = () => {
 
   return (
     <div className="App">
-      { buttons }
-      <Button clickable content="J'aime"></Button>
+      <h1>Facebook Lite</h1>
+      <div className="profiles">{ buttons }</div>
       <br/>
-      {JSON.stringify(currentProfile)}
+      <div className="container">
+      <div className="thumbnail">
+        <img src={currentProfile.image} ></img>
+        <p>{currentProfile.firstname}</p>
+        <p>{currentProfile.name}</p>
+        <p>{currentProfile.dateOfBirth}</p>
+        <Button style content="changer de style"></Button>
+      </div>
+      </div>
+      <div className="content">
+      <div class="publicationZone">
+      <p>{currentProfile.publication}</p>
+      <Button clickable content="J'aime"></Button>
+      </div>
+      </div>
     </div>
   );
 }
 
 
-const Button = ({content, clickable, callback}) => {
+const Button = ({content, clickable, callback,}) => {
   const [clicked, setClicked] = useState(false);  
   var renderedText = content
   var handleClick;
   if (clickable){
     renderedText = `${clicked ? 1 : 0} ` + renderedText
     handleClick = () => setClicked(!clicked)
-  } else if (callback) {
+  } 
+
+  else if (callback) {
     handleClick = () => callback(content)
   }
-
   return (
     <button 
       className="button" 

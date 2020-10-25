@@ -4,7 +4,7 @@ import img3 from './img/camille.jpg';
 import './App.css';
 import { useState } from 'react';
 
-const PROFILS = [
+var PROFILS = [
   {
     firstname: "Bob",
     name: "Dylan",
@@ -34,8 +34,14 @@ const App = () => {
   const [colored, setColored] = useState("white");
 
   // Utils
+  const handleLikedClick = (firstname) => {
+    const profileIdx = PROFILS.findIndex(p => p.firstname == firstname) 
+    PROFILS[profileIdx].publication.liked = !PROFILS[profileIdx].publication.liked
+    const updated_prof = {...PROFILS[profileIdx]}
+    setCurrentProfile(updated_prof)
+  }
   const handleProfileClick = firstname => {
-    const profileClicked = PROFILS.filter(p => p.firstname == firstname)[0]
+    const profileClicked = PROFILS.find(p => p.firstname == firstname)
     setCurrentProfile(profileClicked)
   }
   const handleBackgroundChange = () => {
@@ -58,9 +64,9 @@ const App = () => {
       </div>
       </div>
       <div className="content">
-      <div class="publicationZone">
+      <div className="publicationZone">
       <p>{currentProfile.publication.content}</p>
-      <Button clickable content="J'aime"></Button>
+      <Button firstname={currentProfile.firstname} liked={currentProfile.publication.liked} callback={handleLikedClick} content="J'aime"></Button>
       </div>
       </div>
     </div>
@@ -68,15 +74,14 @@ const App = () => {
 }
 
 
-const Button = ({content, clickable, callback}) => {
-  const [clicked, setClicked] = useState(false);
+const Button = ({content, liked, callback, firstname}) => {
   var renderedText = content
   var handleClick
-  if (clickable){
-    renderedText = `${clicked ? 1 : 0} ` + renderedText
-    handleClick = () => setClicked(!clicked)
-  }  else if (callback) {
-    handleClick = () => callback(content)
+  if (liked != undefined){
+    renderedText = `${liked ? 1 : 0} ` + renderedText
+  }
+  if (callback) {
+    handleClick = () => callback(liked != undefined ? firstname : content)
   }
 
   return (
